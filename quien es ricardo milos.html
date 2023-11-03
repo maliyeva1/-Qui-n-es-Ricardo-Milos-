@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>¿Quién es Ricardo Milos?</title>
+</head>
+<style>
+	body {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+		margin: 0;
+		background-image: url('Ricardo Milos.jpg');
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+
+	#balloon {
+		width: 200px;
+		height: 200px;
+		background-color: red;
+		border-radius: 50%;
+		cursor: pointer;
+		transition: all 0.3s;
+	}
+
+	#balloon.green {
+		background-color: green;
+	}
+	#balloon.blue {
+		background-color: blue;
+	}
+</style>
+<body>
+	<div id="balloon" class="red"></div>
+	<script>
+		const backgroundimages = [
+			'url(ricardo.jpeg)',
+			'url(12.jpeg)',
+			'url(13.jpeg)',
+			'url(16.jpeg)',
+			'url(1f0.jpg)',
+			'url(317657.jpg)',
+			'url(17.jpeg)',
+			'url(18.jpeg)'
+		];
+		let backgroundimageindex = 0;
+		let backgroundchanging = false;
+		const balloon = document.getElementById('balloon');
+		let size = 200;
+		let colorindex = 0;
+		let audio = new Audio('aroundtheworld.mp3');
+		const colors = ['lightblue', 'blue', 'darkblue'];
+		balloon.addEventListener('click', () => {
+			size += 10;
+			if (size > 420) {
+				size = 200;
+			}
+			colorindex = (colorindex + 1) % colors.length;
+			changeballoonsizeandcolorandplaymusic();
+			changebackgroundimage();
+		});
+		function changebackgroundimage() {
+			document.body.style.backgroundImage = backgroundimages[backgroundimageindex];
+			backgroundimageindex = (backgroundimageindex + 1) % backgroundimages.length;
+		}
+		balloon.addEventListener('mouseenter', () => {
+			if (size > 200) {
+				size -= 5;
+				if (colorindex > 0) {
+					colorindex--;
+				}
+			}
+			changeballoonsizeandcolor();
+		})
+
+		function playAudio() {
+			audio.play();
+		}
+		function changeballoonsizeandcolor() {
+			balloon.style.width = size + 'px';
+			balloon.style.height = size + 'px';
+			balloon.style.backgroundColor = colors[colorindex];
+		}
+		function changeballoonsizeandcolorandplaymusic() {
+			balloon.style.width = size + 'px';
+			balloon.style.height = size + 'px';
+			balloon.style.backgroundColor = colors[colorindex];
+			playAudio();
+		}
+	</script>
+</body>
+</html>
